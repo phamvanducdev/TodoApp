@@ -1,0 +1,3 @@
+class NetworkStorageService {
+  // TODO: implement
+}
