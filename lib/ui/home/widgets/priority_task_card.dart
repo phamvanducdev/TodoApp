@@ -62,7 +62,7 @@ class PriorityTaskCard extends StatelessWidget {
               left: 12,
               child: Row(
                 children: [
-                  WidgetUtils.svgPicture(cardTheme.titleIcon),
+                  WidgetUtils.svgPicture(cardTheme.icon),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(

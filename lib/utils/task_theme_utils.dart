@@ -31,16 +31,29 @@ extension TaskThemeTypeExt on TaskThemeType {
     }
   }
 
-  String get titleIcon {
+  String get icon {
     switch (this) {
       case TaskThemeType.blue:
-        return AppAssets.iconTaskTitle3;
+        return AppAssets.iconTaskLogoType1;
       case TaskThemeType.purple:
-        return AppAssets.iconTaskTitle2;
+        return AppAssets.iconTaskLogoType2;
       case TaskThemeType.red:
-        return AppAssets.iconTaskTitle1;
+        return AppAssets.iconTaskLogoType3;
       default:
-        return AppAssets.iconTaskTitle1;
+        return AppAssets.iconTaskLogoType1;
+    }
+  }
+
+  String get iconTintColor {
+    switch (this) {
+      case TaskThemeType.blue:
+        return AppAssets.iconTaskLogoType1TintColor;
+      case TaskThemeType.purple:
+        return AppAssets.iconTaskLogoType2TintColor;
+      case TaskThemeType.red:
+        return AppAssets.iconTaskLogoType3TintColor;
+      default:
+        return AppAssets.iconTaskLogoType1TintColor;
     }
   }
 }

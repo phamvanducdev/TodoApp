@@ -23,11 +23,7 @@ class TaskDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 16,
       title: Row(
         children: [
-          WidgetUtils.svgPicture(
-            task.themeType.titleIcon,
-            colorFilter: ColorFilter.mode(AppColors.brandColor, BlendMode.srcIn),
-            width: 28,
-          ),
+          WidgetUtils.svgPicture(task.themeType.iconTintColor, width: 28),
           const SizedBox(width: 12),
           Flexible(
             child: Text(
