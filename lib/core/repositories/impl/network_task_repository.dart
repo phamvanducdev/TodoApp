@@ -3,6 +3,7 @@ import 'package:todo_plugin/core/repositories/task_repository.dart';
 import 'package:todo_plugin/core/services/network_storage_service.dart';
 
 class NetworkTaskRepository implements TaskRepository {
+  // ignore: unused_field
   final NetworkStorageService _service;
 
   NetworkTaskRepository({required NetworkStorageService service}) : _service = service;

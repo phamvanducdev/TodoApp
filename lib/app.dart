@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo_plugin/ui/home/home_page.dart';
+import 'package:todo_plugin/routers/app_router.dart';
 
-class TodoApp extends StatefulWidget {
+class TodoApp extends StatelessWidget {
   const TodoApp({super.key});
 
   @override
-  State<TodoApp> createState() => _TodoAppState();
-}
-
-class _TodoAppState extends State<TodoApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
+    );
   }
 }
