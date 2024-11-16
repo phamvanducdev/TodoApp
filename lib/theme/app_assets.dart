@@ -14,6 +14,8 @@ class AppAssets {
   static String iconBackSquare = 'assets/icons/ic_back_square.svg';
   static String iconAdd = 'assets/icons/ic_add.svg';
   static String iconSuccess = 'assets/icons/ic_tick_square.svg';
+  static String iconPlus = 'assets/icons/ic_plus.svg';
+  static String iconMenu = 'assets/icons/ic_menu.svg';
 
   /// Backgrounds
   static String bgPriorityTaskCard = 'assets/images/bg_priority_task_card.svg';

@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_plugin/core/usecases/add_task_usecase.dart';
 import 'package:todo_plugin/core/usecases/get_available_priority_task_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
-import 'package:todo_plugin/ui/home/home_viewmodel.dart';
-import 'package:todo_plugin/ui/home/widgets/home_app_bar.dart';
-import 'package:todo_plugin/ui/home/widgets/home_header.dart';
-import 'package:todo_plugin/ui/home/widgets/home_priority_task.dart';
+import 'package:todo_plugin/ui/priority_tasks/priority_tasks_viewmodel.dart';
+import 'package:todo_plugin/ui/priority_tasks/widgets/priority_tasks_app_bar.dart';
+import 'package:todo_plugin/ui/priority_tasks/widgets/priority_tasks_header.dart';
+import 'package:todo_plugin/ui/priority_tasks/widgets/priority_task_list.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class PriorityTasksPage extends StatefulWidget {
+  const PriorityTasksPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<PriorityTasksPage> createState() => PriorityTasksPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late HomeViewModel _viewModel;
+class PriorityTasksPageState extends State<PriorityTasksPage> {
+  late PriorityTasksViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = HomeViewModel(
+    _viewModel = PriorityTasksViewModel(
       availablePriorityTaskUseCase: getIt<GetAvailablePriorityTaskUseCase>(),
-      addTaskUseCase: getIt<AddTaskUseCase>(),
     )..initializer();
   }
 
@@ -33,14 +31,15 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  refresh() => _viewModel.initializer();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: HomeAppBar(
+      appBar: PriorityTasksAppBar(
         onSettingPressed: () async {
-          await context.push('/addTask');
-          _viewModel.initializer();
+          // TODO: implement
         },
       ),
       body: SingleChildScrollView(
@@ -48,9 +47,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HomeHeader(viewModel: _viewModel),
+            PriorityTasksHeader(viewModel: _viewModel),
             const SizedBox(height: 12),
-            HomePriorityTask(
+            PriorityTaskList(
               viewModel: _viewModel,
               openTaskDetails: (task) async {
                 await context.push('/details', extra: task);

@@ -7,6 +7,7 @@ import 'package:todo_plugin/ui/add_task/add_task_viewmodel.dart';
 import 'package:todo_plugin/ui/add_task/widgets/todo_item.dart';
 import 'package:todo_plugin/utils/widget_utils.dart';
 import 'package:todo_plugin/widgets/dashed_border_painter.dart';
+import 'package:todo_plugin/widgets/input_todo_dialog.dart';
 
 class AddTodoList extends StatelessWidget {
   final AddTaskViewModel viewModel;
@@ -35,8 +36,13 @@ class AddTodoList extends StatelessWidget {
               children: todoList
                   .map((todo) => TodoItem(
                         todo: todo,
-                        onPressed: () {
-                          // TODO: implement
+                        onPressed: () async {
+                          await showInputTodoDialog(
+                            context,
+                            todo: todo,
+                            onUpdatePressed: (newTodo) => viewModel.updateTodo(newTodo),
+                            onRemovePressed: () => viewModel.removeTodo(todo),
+                          );
                         },
                       ))
                   .toList(),
@@ -50,9 +56,10 @@ class AddTodoList extends StatelessWidget {
 
   _buildAddTodo(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        viewModel.addTodo(
-          Todo(id: DateTime.now().millisecondsSinceEpoch, title: 'Hello'),
+      onTap: () async {
+        await showInputTodoDialog(
+          context,
+          onUpdatePressed: (todo) => viewModel.addTodo(todo),
         );
       },
       child: Container(
@@ -68,7 +75,7 @@ class AddTodoList extends StatelessWidget {
               children: [
                 WidgetUtils.svgPicture(
                   AppAssets.iconAdd,
-                  colorFilter: ColorFilter.mode(AppColors.textColor.withOpacity(0.5), BlendMode.srcIn),
+                  color: AppColors.textColor.withOpacity(0.5),
                   width: 12,
                 ),
                 const SizedBox(width: 10),

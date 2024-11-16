@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:todo_plugin/theme/app_assets.dart';
+import 'package:todo_plugin/theme/app_colors.dart';
 
 enum TaskThemeType { blue, purple, red }
 
@@ -8,13 +9,13 @@ extension TaskThemeTypeExt on TaskThemeType {
   Color get backgroundColor {
     switch (this) {
       case TaskThemeType.blue:
-        return const Color(0xFF006EE9);
+        return AppColors.subBrandColor;
       case TaskThemeType.purple:
         return const Color(0xFF311F65);
       case TaskThemeType.red:
         return const Color(0xFFD92C2C);
       default:
-        return const Color(0xFF006EE9);
+        return AppColors.subBrandColor;
     }
   }
 

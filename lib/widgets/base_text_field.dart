@@ -11,6 +11,7 @@ class BaseTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final bool autoFocus;
 
   const BaseTextField({
     super.key,
@@ -22,6 +23,7 @@ class BaseTextField extends StatelessWidget {
     this.minLines,
     this.maxLenght,
     this.keyboardType = TextInputType.text,
+    this.autoFocus = false,
   });
 
   @override
@@ -35,8 +37,9 @@ class BaseTextField extends StatelessWidget {
       minLines: minLines,
       decoration: InputDecoration(
         hintText: hint,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.brandColor.withOpacity(0.5)),
+          borderSide: BorderSide(color: AppColors.subBrandColor.withOpacity(0.5)),
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
@@ -54,6 +57,7 @@ class BaseTextField extends StatelessWidget {
       keyboardType: keyboardType,
       cursorColor: AppColors.brandColor,
       cursorHeight: 20,
+      autofocus: autoFocus,
     );
   }
 }

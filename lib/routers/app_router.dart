@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_plugin/core/models/task.dart';
 import 'package:todo_plugin/ui/add_task/add_task_screen.dart';
+import 'package:todo_plugin/ui/home/home_screen.dart';
 import 'package:todo_plugin/ui/task_details/task_details_screen.dart';
-import 'package:todo_plugin/ui/home/home_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -11,7 +11,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const HomePage();
+          return const HomeScreen();
         },
         routes: <RouteBase>[
           GoRoute(

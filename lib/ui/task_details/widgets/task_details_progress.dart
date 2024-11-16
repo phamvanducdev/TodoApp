@@ -28,7 +28,7 @@ class TaskDetailsProgress extends StatelessWidget {
               LinearProgressIndicator(
                 minHeight: 20,
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xFF006EE9),
+                color: AppColors.subBrandColor,
                 backgroundColor: const Color(0xFFA9A2A2),
                 value: progress,
               ),

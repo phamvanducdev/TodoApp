@@ -23,7 +23,7 @@ showSuccessDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          shadowColor: const Color(0xFF006EE9).withOpacity(0.3),
+          shadowColor: AppColors.subBrandColor.withOpacity(0.3),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

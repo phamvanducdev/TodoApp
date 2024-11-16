@@ -59,16 +59,16 @@ class PriorityTaskCard extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              left: 12,
+              left: 10,
               child: Row(
                 children: [
                   WidgetUtils.svgPicture(cardTheme.icon),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       task.title,
                       style: AppTextStyle.textBaseSemiBold.copyWith(color: Colors.white),
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

@@ -37,7 +37,7 @@ class TaskDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: WidgetUtils.svgPicture(
             AppAssets.iconCloseSquare,
-            colorFilter: ColorFilter.mode(AppColors.brandColor, BlendMode.srcIn),
+            color: AppColors.brandColor,
           ),
           onPressed: () => context.pop(),
         ),

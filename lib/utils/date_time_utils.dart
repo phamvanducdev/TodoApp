@@ -4,6 +4,10 @@ class DateTimeUtils {
   static const String formatEEEEMMMddyyyy = "EEEE, MMM dd yyyy";
   static const String formatddMMMyyyy = "dd MMM yyyy";
   static const String formatMMMddyyyy = "MMM-dd-yyyy";
+  static const String formatMMMyyyy = "MMM, yyyy";
+  static const String formatEEE = "EEE";
+  static const String formatdd = "dd";
+  static const String formatMMMdd = "MMM, dd";
 
   static DateTime from(int milliseconds) {
     return DateTime.fromMillisecondsSinceEpoch(milliseconds);
@@ -13,6 +17,7 @@ class DateTimeUtils {
     return DateFormat(formatPattern).format(dateTime);
   }
 
+  // TODO revert extension
   static String timeDifference(DateTime dateTime) {
     final now = DateTime.now();
     final difference = dateTime.difference(now);
@@ -38,6 +43,7 @@ class DateTimeUtils {
     }
   }
 
+  /// TODO revert extension
   /// returns [months, days, hours]
   static List<int> timeDifferences(DateTime dateTime) {
     final DateTime now = DateTime.now();

@@ -23,7 +23,7 @@ class WidgetUtils {
     BoxFit? fit,
     double? width,
     double? height,
-    ColorFilter? colorFilter,
+    Color? color,
   }) {
     return SvgPicture.asset(
       asset,
@@ -31,7 +31,7 @@ class WidgetUtils {
       fit: fit ?? BoxFit.contain,
       width: width,
       height: height,
-      colorFilter: colorFilter,
+      colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
     );
   }
 }

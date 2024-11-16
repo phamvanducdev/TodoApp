@@ -56,10 +56,11 @@ class AddTaskButton extends StatelessWidget {
     final bool result = await viewModel.onCreateTask();
     if (result) {
       showSuccessDialog(
+        // ignore: use_build_context_synchronously
         context,
         message: 'Task created successfully!',
         confirmText: 'Back',
-        onConfirmed: () => context.pop(),
+        onConfirmed: () => context.pop(true),
       );
     } else {
       // Handle errors
