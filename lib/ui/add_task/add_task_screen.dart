@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:todo_plugin/core/models/task.dart';
 import 'package:todo_plugin/core/usecases/add_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/ui/add_task/add_task_viewmodel.dart';
 import 'package:todo_plugin/ui/add_task/widgets/add_task_button.dart';
 import 'package:todo_plugin/ui/add_task/widgets/add_todo_list.dart';
 import 'package:todo_plugin/ui/add_task/widgets/input_description.dart';
+import 'package:todo_plugin/ui/add_task/widgets/input_priority.dart';
 import 'package:todo_plugin/ui/add_task/widgets/input_start_end_date_time.dart';
 import 'package:todo_plugin/ui/add_task/widgets/input_title.dart';
+import 'package:todo_plugin/ui/add_task/widgets/task_title.dart';
 import 'package:todo_plugin/widgets/base_app_bar.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key});
+  final Task? task;
+
+  const AddTaskScreen({
+    super.key,
+    this.task,
+  });
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
@@ -25,7 +34,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   void initState() {
     super.initState();
     _viewModel = AddTaskViewModel(
+      task: widget.task,
       addTaskUseCase: getIt<AddTaskUseCase>(),
+      updateTaskUseCase: getIt<UpdateTaskUseCase>(),
     )..initializer();
   }
 
@@ -39,44 +50,58 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return KeyboardDismisser(
       child: Scaffold(
-        backgroundColor: AppColors.brandColor,
-        appBar: const BaseAppBar(title: 'Add Task'),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 24),
-                    Container(
-                      constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            InputStartEndDateTime(viewModel: _viewModel),
-                            const SizedBox(height: 24),
-                            InputTitle(viewModel: _viewModel),
-                            const SizedBox(height: 16),
-                            InputDescription(viewModel: _viewModel),
-                            const SizedBox(height: 16),
-                            AddTodoList(viewModel: _viewModel),
-                          ],
-                        ),
+        backgroundColor: Colors.white,
+        appBar: BaseAppBar(title: _viewModel.isCreateNew ? 'Add Task' : 'Update Task'),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Container(color: AppColors.brandColor),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 24),
+                          Container(
+                            constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  if (!_viewModel.isCreateNew && widget.task != null) ...[
+                                    TaskTitle(task: widget.task!),
+                                    const SizedBox(height: 32),
+                                  ],
+                                  InputStartEndDateTime(viewModel: _viewModel),
+                                  const SizedBox(height: 24),
+                                  InputTitle(viewModel: _viewModel),
+                                  const SizedBox(height: 16),
+                                  InputPriority(viewModel: _viewModel),
+                                  const SizedBox(height: 24),
+                                  InputDescription(viewModel: _viewModel),
+                                  const SizedBox(height: 16),
+                                  AddTodoList(viewModel: _viewModel),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  AddTaskButton(viewModel: _viewModel),
+                ],
               ),
-            ),
-            AddTaskButton(viewModel: _viewModel),
-          ],
+            ],
+          ),
         ),
       ),
     );

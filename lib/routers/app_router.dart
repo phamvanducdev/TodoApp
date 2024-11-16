@@ -23,7 +23,8 @@ class AppRouter {
           GoRoute(
             path: 'addTask',
             builder: (BuildContext context, GoRouterState state) {
-              return const AddTaskScreen();
+              final Task? task = state.extra != null ? state.extra as Task : null;
+              return AddTaskScreen(task: task);
             },
           ),
         ],

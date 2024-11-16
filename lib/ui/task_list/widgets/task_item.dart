@@ -52,7 +52,8 @@ class TaskItem extends StatelessWidget {
                       GestureDetector(
                         onTap: onMenuPressed,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(8),
                           child: WidgetUtils.svgPicture(AppAssets.iconMenu, width: 16),
                         ),
                       ),

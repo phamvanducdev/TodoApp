@@ -21,15 +21,15 @@ class TaskDetailsProgress extends StatelessWidget {
             'Progress',
             style: AppTextStyle.textSMMedium.copyWith(color: AppColors.textColor),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 8),
           Stack(
             alignment: Alignment.center,
             children: [
               LinearProgressIndicator(
                 minHeight: 20,
                 borderRadius: BorderRadius.circular(10),
+                backgroundColor: AppColors.greyColor,
                 color: AppColors.subBrandColor,
-                backgroundColor: const Color(0xFFA9A2A2),
                 value: progress,
               ),
               Text(

@@ -103,8 +103,11 @@ class TaskListPageState extends State<TaskListPage> {
                       onMenuPressed: () async {
                         await showTaskMenuDialog(
                           context,
-                          onEditPressed: () {
-                            // TODO: open editing
+                          onEditPressed: () async {
+                            final result = await context.push('/addTask', extra: taskList[index]);
+                            if (result is bool && result) {
+                              await _viewModel.fetchTaskList();
+                            }
                           },
                           onRemovePressed: () => _viewModel.onRemoveTask(taskList[index].id),
                         );

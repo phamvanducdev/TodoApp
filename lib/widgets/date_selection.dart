@@ -10,7 +10,8 @@ class DateSelection extends StatelessWidget {
   final DateTime currentDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
-  final Function(DateTime) onDateChanged;
+  final bool isEnable;
+  final Function(DateTime)? onDateChanged;
 
   const DateSelection({
     super.key,
@@ -18,7 +19,8 @@ class DateSelection extends StatelessWidget {
     required this.currentDate,
     this.firstDate,
     this.lastDate,
-    required this.onDateChanged,
+    this.isEnable = true,
+    this.onDateChanged,
   });
 
   @override
@@ -32,20 +34,28 @@ class DateSelection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         GestureDetector(
-          onTap: () async {
-            final DateTime? pickedDate = await showDatePicker(
-              context: context,
-              initialDate: currentDate,
-              firstDate: firstDate ?? DateTime.now(),
-              lastDate: lastDate ?? DateTime.now().add(const Duration(days: 365)),
-            );
-            if (pickedDate != null && pickedDate != currentDate) {
-              onDateChanged(pickedDate);
-            }
-          },
+          onTap: isEnable
+              ? () async {
+                  DateTime toDate = lastDate ?? DateTime.now().add(const Duration(days: 365));
+                  DateTime fromDate = firstDate ?? DateTime.now();
+                  if (fromDate.isAfter(currentDate)) {
+                    fromDate = currentDate;
+                  }
+                  final DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: currentDate,
+                    firstDate: fromDate,
+                    lastDate: toDate,
+                  );
+                  if (pickedDate != null && pickedDate != currentDate) {
+                    onDateChanged?.call(pickedDate);
+                  }
+                }
+              : null,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
             decoration: BoxDecoration(
+              color: isEnable ? Colors.white : const Color(0xFFEEF5FD),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.brandColor.withOpacity(0.08)),
             ),

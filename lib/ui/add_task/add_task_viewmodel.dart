@@ -3,13 +3,21 @@ import 'package:rxdart/rxdart.dart';
 import 'package:todo_plugin/core/models/task.dart';
 import 'package:todo_plugin/core/models/todo.dart';
 import 'package:todo_plugin/core/usecases/add_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
+import 'package:todo_plugin/utils/date_time_utils.dart';
 
 class AddTaskViewModel {
+  final Task? _task;
   final AddTaskUseCase _addTaskUseCase;
+  final UpdateTaskUseCase _updateTaskUseCase;
 
   AddTaskViewModel({
+    required Task? task,
     required AddTaskUseCase addTaskUseCase,
-  }) : _addTaskUseCase = addTaskUseCase;
+    required UpdateTaskUseCase updateTaskUseCase,
+  })  : _task = task,
+        _addTaskUseCase = addTaskUseCase,
+        _updateTaskUseCase = updateTaskUseCase;
 
   Duration minTimePeriod = const Duration(days: 1);
 
@@ -19,10 +27,6 @@ class AddTaskViewModel {
   final FocusNode inputTitleFocusNode = FocusNode();
   final FocusNode inputDescriptionFocusNode = FocusNode();
 
-  final _todoListSubject = BehaviorSubject<List<Todo>>();
-  Stream<List<Todo>> get todoListStream => _todoListSubject.stream;
-  List<Todo> get todoList => _todoListSubject.valueOrNull ?? [];
-
   final _startTimeSubject = BehaviorSubject<DateTime>();
   Stream<DateTime> get startTimeStream => _startTimeSubject.stream;
   DateTime get startTime => _startTimeSubject.valueOrNull ?? DateTime.now();
@@ -31,12 +35,32 @@ class AddTaskViewModel {
   Stream<DateTime> get endTimeStream => _endTimeSubject.stream;
   DateTime get endTime => _endTimeSubject.valueOrNull ?? DateTime.now();
 
+  final _priorityTaskSubject = BehaviorSubject<bool>();
+  Stream<bool> get priorityTaskStream => _priorityTaskSubject.stream;
+  bool get priorityTask => _priorityTaskSubject.valueOrNull ?? false;
+
+  final _todoListSubject = BehaviorSubject<List<Todo>>();
+  Stream<List<Todo>> get todoListStream => _todoListSubject.stream;
+  List<Todo> get todoList => _todoListSubject.valueOrNull ?? [];
+
   final _validateSubject = BehaviorSubject<bool>();
   Stream<bool> get validateStream => _validateSubject.stream;
 
+  bool isCreateNew = true;
+
   initializer() {
-    _startTimeSubject.add(DateTime.now());
-    _endTimeSubject.add(DateTime.now().add(minTimePeriod));
+    if (_task != null) {
+      isCreateNew = false;
+      inputTitleController.text = _task.title;
+      inputDescriptionController.text = _task.description;
+      _startTimeSubject.add(DateTimeUtils.from(_task.startTime));
+      _endTimeSubject.add(DateTimeUtils.from(_task.endTime));
+      _priorityTaskSubject.add(_task.priority);
+      _todoListSubject.add(_task.todoList);
+    } else {
+      _startTimeSubject.add(DateTime.now());
+      _endTimeSubject.add(DateTime.now().add(minTimePeriod));
+    }
   }
 
   onStartTimeChanged(DateTime value) {
@@ -56,6 +80,11 @@ class AddTaskViewModel {
   }
 
   onTitleChanged() {
+    _validate();
+  }
+
+  onPriorityChanged(bool value) {
+    _priorityTaskSubject.add(value);
     _validate();
   }
 
@@ -83,20 +112,35 @@ class AddTaskViewModel {
     _validate();
   }
 
-  Future<bool> onCreateTask() async {
-    final DateTime now = DateTime.now();
-    final Task newTask = Task(
-      id: now.millisecondsSinceEpoch,
-      title: inputTitleController.text,
-      description: inputDescriptionController.text,
-      createTime: now.millisecondsSinceEpoch,
-      startTime: startTime.millisecondsSinceEpoch,
-      endTime: endTime.millisecondsSinceEpoch,
-      priority: true,
-      todoList: todoList,
-    );
-    await _addTaskUseCase.execute(newTask);
-    return true;
+  Future<bool> onCreateOrUpdateTask() async {
+    if (isCreateNew) {
+      final DateTime now = DateTime.now();
+      final Task newTask = Task(
+        id: now.millisecondsSinceEpoch,
+        title: inputTitleController.text,
+        description: inputDescriptionController.text,
+        createTime: now.millisecondsSinceEpoch,
+        startTime: startTime.millisecondsSinceEpoch,
+        endTime: endTime.millisecondsSinceEpoch,
+        priority: priorityTask,
+        todoList: todoList,
+      );
+      await _addTaskUseCase.execute(newTask);
+      return true;
+    } else {
+      final Task updatedTask = Task(
+        id: _task!.id,
+        title: inputTitleController.text,
+        description: inputDescriptionController.text,
+        createTime: _task.createTime,
+        startTime: startTime.millisecondsSinceEpoch,
+        endTime: endTime.millisecondsSinceEpoch,
+        priority: priorityTask,
+        todoList: todoList,
+      );
+      await _updateTaskUseCase.execute(updatedTask);
+      return true;
+    }
   }
 
   _validate() {

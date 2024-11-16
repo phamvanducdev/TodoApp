@@ -6,5 +6,6 @@ class AppColors {
   static Color headerColor = const Color(0xFF000000);
   static Color subHeaderColor = const Color(0xFF474747);
   static Color textColor = const Color(0xFF4A4646);
+  static Color greyColor = const Color(0xFFE8E8E8);
   static Color destructiveColor = const Color(0xFFCB2F2F);
 }

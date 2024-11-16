@@ -42,7 +42,7 @@ class AddTaskButton extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                'Add Task',
+                viewModel.isCreateNew ? 'Add Task' : 'Update Task',
                 style: AppTextStyle.textSMSemiBold.copyWith(color: Colors.white),
               ),
             ),
@@ -53,12 +53,12 @@ class AddTaskButton extends StatelessWidget {
   }
 
   _onAddTaskPressed(BuildContext context) async {
-    final bool result = await viewModel.onCreateTask();
+    final bool result = await viewModel.onCreateOrUpdateTask();
     if (result) {
       showSuccessDialog(
         // ignore: use_build_context_synchronously
         context,
-        message: 'Task created successfully!',
+        message: viewModel.isCreateNew ? 'Task created successfully!' : 'Task updated successfully!',
         confirmText: 'Back',
         onConfirmed: () => context.pop(true),
       );

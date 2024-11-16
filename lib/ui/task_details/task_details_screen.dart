@@ -66,6 +66,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 12),
                 TaskDetailsTimes(startTime: startTime, endTime: endTime),
                 TaskDetailsCountdown(endTime: endTime),
                 TaskDetailsDescription(description: task.description),

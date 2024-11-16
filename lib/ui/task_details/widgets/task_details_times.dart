@@ -24,7 +24,7 @@ class TaskDetailsTimes extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'start',
+                'Start',
                 style: AppTextStyle.textSMMedium.copyWith(color: AppColors.textColor),
               ),
               Text(
@@ -37,7 +37,7 @@ class TaskDetailsTimes extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'end',
+                'End',
                 style: AppTextStyle.textSMMedium.copyWith(color: AppColors.textColor),
               ),
               Text(
