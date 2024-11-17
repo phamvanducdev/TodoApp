@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:todo_plugin/theme/app_assets.dart';
-import 'package:todo_plugin/theme/app_colors.dart';
+import 'package:todo_plugin/config/app_assets.dart';
+import 'package:todo_plugin/config/app_colors.dart';
 
 enum TaskThemeType { blue, purple, red }
 

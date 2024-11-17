@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:todo_plugin/config.dart';
+import 'package:todo_plugin/config/app_config.dart';
 
 class WidgetUtils {
   static Image image(
@@ -11,7 +11,7 @@ class WidgetUtils {
   }) {
     return Image.asset(
       asset,
-      package: TodoAppConfig.packageName,
+      package: AppConfig.packageName,
       fit: fit ?? BoxFit.contain,
       width: width,
       height: height,
@@ -27,7 +27,7 @@ class WidgetUtils {
   }) {
     return SvgPicture.asset(
       asset,
-      package: TodoAppConfig.packageName,
+      package: AppConfig.packageName,
       fit: fit ?? BoxFit.contain,
       width: width,
       height: height,
