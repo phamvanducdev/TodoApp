@@ -8,5 +8,5 @@ class AddTaskUseCase {
     required TaskRepository repository,
   }) : _repository = repository;
 
-  Future<void> execute(Task task) => _repository.add(task);
+  Future<void> execute(Task task) => _repository.create(task);
 }

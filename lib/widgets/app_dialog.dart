@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_plugin/theme/app_assets.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/theme/app_text_styles.dart';
 import 'package:todo_plugin/utils/widget_utils.dart';
 
-showSuccessDialog(
+showConfirmDialog(
   BuildContext context, {
   required String message,
+  String? icon,
   String? title,
   String? confirmText,
   String? cancelText,
@@ -29,14 +29,20 @@ showSuccessDialog(
             children: [
               const SizedBox(height: 12),
 
-              /// Titles or Icons
-              title != null
-                  ? Text(
-                      title,
-                      style: AppTextStyle.textBaseSemiBold.copyWith(color: AppColors.brandColor),
-                    )
-                  : WidgetUtils.svgPicture(AppAssets.iconSuccess),
-              const SizedBox(height: 16),
+              /// Icons
+              if (icon != null) ...[
+                WidgetUtils.svgPicture(icon),
+                const SizedBox(height: 16),
+              ],
+
+              /// Icons
+              if (title != null) ...[
+                Text(
+                  title,
+                  style: AppTextStyle.textBaseSemiBold.copyWith(color: AppColors.brandColor),
+                ),
+                const SizedBox(height: 16),
+              ],
 
               /// Messages
               Text(

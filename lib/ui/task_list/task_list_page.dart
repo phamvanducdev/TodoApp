@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_plugin/core/models/task.dart';
-import 'package:todo_plugin/core/usecases/get_tasks_usecase.dart';
-import 'package:todo_plugin/core/usecases/remove_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/get_tasks_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/remove_task_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/theme/app_text_styles.dart';
@@ -10,6 +10,7 @@ import 'package:todo_plugin/ui/task_list/task_list_viewmodel.dart';
 import 'package:todo_plugin/ui/task_list/widgets/task_list_calendar_tab_bar.dart';
 import 'package:todo_plugin/ui/task_list/widgets/task_item.dart';
 import 'package:todo_plugin/ui/task_list/widgets/task_list_app_bar.dart';
+import 'package:todo_plugin/widgets/app_dialog.dart';
 import 'package:todo_plugin/widgets/task_menu_dialog.dart';
 
 class TaskListPage extends StatefulWidget {
@@ -109,7 +110,13 @@ class TaskListPageState extends State<TaskListPage> {
                               await _viewModel.fetchTaskList();
                             }
                           },
-                          onRemovePressed: () => _viewModel.onRemoveTask(taskList[index].id),
+                          onRemovePressed: () => showConfirmDialog(
+                            context,
+                            message: 'Do you want to delete this task?',
+                            confirmText: 'Delete',
+                            cancelText: 'Cancel',
+                            onConfirmed: () => _viewModel.onRemoveTask(taskList[index].id),
+                          ),
                         );
                       },
                     );

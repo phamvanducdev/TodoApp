@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:todo_plugin/core/models/task.dart';
 import 'package:todo_plugin/core/models/todo.dart';
-import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/update_task_usecase.dart';
 
 class TaskDetailsViewModel {
   final UpdateTaskUseCase _updateTaskUseCase;

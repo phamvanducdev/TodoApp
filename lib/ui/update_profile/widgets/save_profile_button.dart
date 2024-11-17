@@ -4,12 +4,13 @@ import 'package:todo_plugin/theme/app_assets.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/theme/app_text_styles.dart';
 import 'package:todo_plugin/ui/add_task/add_task_viewmodel.dart';
+import 'package:todo_plugin/ui/update_profile/update_profile_viewmodel.dart';
 import 'package:todo_plugin/widgets/app_dialog.dart';
 
-class AddTaskButton extends StatelessWidget {
-  final AddTaskViewModel viewModel;
+class SaveProfileButton extends StatelessWidget {
+  final UpdateProfileViewModel viewModel;
 
-  const AddTaskButton({
+  const SaveProfileButton({
     super.key,
     required this.viewModel,
   });
@@ -34,7 +35,7 @@ class AddTaskButton extends StatelessWidget {
         builder: (_, snapshot) {
           final bool validate = snapshot.data ?? false;
           return GestureDetector(
-            onTap: validate ? () => _onAddTaskPressed(context) : null,
+            onTap: validate ? () => _onSavePressed(context) : null,
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class AddTaskButton extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                viewModel.isCreateNew ? 'Add Task' : 'Update Task',
+                'Save',
                 style: AppTextStyle.textSMSemiBold.copyWith(color: Colors.white),
               ),
             ),
@@ -53,14 +54,14 @@ class AddTaskButton extends StatelessWidget {
     );
   }
 
-  _onAddTaskPressed(BuildContext context) async {
-    final bool result = await viewModel.onCreateOrUpdateTask();
+  _onSavePressed(BuildContext context) async {
+    final bool result = await viewModel.onSavePressed();
     if (result) {
       showConfirmDialog(
         // ignore: use_build_context_synchronously
         context,
         icon: AppAssets.iconSuccess,
-        message: viewModel.isCreateNew ? 'Task created successfully!' : 'Task updated successfully!',
+        message: 'Profile updated successfully!',
         confirmText: 'Back',
         onConfirmed: () => context.pop(true),
       );

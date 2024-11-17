@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.transparent,
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 20),
         child: HomeFloatingButton(
           onPressed: () async {
             final result = await context.push('/addTask');

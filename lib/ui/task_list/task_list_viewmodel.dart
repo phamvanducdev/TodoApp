@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:todo_plugin/core/models/task.dart';
-import 'package:todo_plugin/core/usecases/get_tasks_usecase.dart';
-import 'package:todo_plugin/core/usecases/remove_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/get_tasks_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/remove_task_usecase.dart';
 
 class TaskListViewModel {
   final GetTasksUseCase _getTasksUseCase;

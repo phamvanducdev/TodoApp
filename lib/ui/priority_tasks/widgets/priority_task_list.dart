@@ -26,7 +26,7 @@ class PriorityTaskList extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         StreamBuilder<List<Task>>(
-          stream: viewModel.availablePriorityTasks,
+          stream: viewModel.priorityTaskListStream,
           builder: (context, snapshot) {
             final List<Task> tasks = snapshot.data ?? [];
             if (tasks.isEmpty) {

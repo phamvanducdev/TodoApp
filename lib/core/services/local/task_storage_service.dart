@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_plugin/core/models/task.dart';
+import 'package:todo_plugin/core/services/app_shared.dart';
 
-class LocalStorageService {
+class TaskStorageService {
   final SharedPreferences _prefs;
 
-  LocalStorageService({required SharedPreferences prefs}) : _prefs = prefs;
+  TaskStorageService({required SharedPreferences prefs}) : _prefs = prefs;
 
-  static const String _taskListKey = 'taskList';
-
-  Future<List<Task>> getTasks() async {
-    final taskListString = _prefs.getString(_taskListKey);
+  Future<List<Task>> getTaskList() async {
+    final taskListString = _prefs.getString(TASK_STORAGE_KEY);
 
     if (taskListString != null) {
       final List<dynamic> jsons = jsonDecode(taskListString);
@@ -20,8 +19,8 @@ class LocalStorageService {
     }
   }
 
-  Future<void> setTasks(List<Task> tasks) async {
+  Future<void> setTaskList(List<Task> tasks) async {
     final taskListString = jsonEncode(tasks.map((task) => task.toJson()).toList());
-    await _prefs.setString(_taskListKey, taskListString);
+    await _prefs.setString(TASK_STORAGE_KEY, taskListString);
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:todo_plugin/core/models/task.dart';
 import 'package:todo_plugin/core/models/todo.dart';
-import 'package:todo_plugin/core/usecases/add_task_usecase.dart';
-import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/add_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/update_task_usecase.dart';
 import 'package:todo_plugin/utils/date_time_utils.dart';
 
 class AddTaskViewModel {

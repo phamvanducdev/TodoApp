@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_plugin/core/models/task.dart';
-import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/update_task_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/theme/app_text_styles.dart';

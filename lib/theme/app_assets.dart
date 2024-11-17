@@ -16,6 +16,12 @@ class AppAssets {
   static String iconSuccess = 'assets/icons/ic_tick_square.svg';
   static String iconPlus = 'assets/icons/ic_plus.svg';
   static String iconMenu = 'assets/icons/ic_menu.svg';
+  static String iconBag = 'assets/icons/ic_bag.svg';
+  static String iconProfile = 'assets/icons/ic_profile.svg';
+  static String iconLocation = 'assets/icons/ic_location.svg';
+  static String iconChart = 'assets/icons/ic_chart.svg';
+  static String iconLogout = 'assets/icons/ic_logout.svg';
+  static String iconEdit = 'assets/icons/ic_edit.svg';
 
   /// Backgrounds
   static String bgPriorityTaskCard = 'assets/images/bg_priority_task_card.svg';

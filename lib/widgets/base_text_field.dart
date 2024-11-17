@@ -12,6 +12,7 @@ class BaseTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool autoFocus;
+  final FormFieldValidator? validation;
 
   const BaseTextField({
     super.key,
@@ -24,11 +25,12 @@ class BaseTextField extends StatelessWidget {
     this.maxLenght,
     this.keyboardType = TextInputType.text,
     this.autoFocus = false,
+    this.validation,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       focusNode: focusNode,
       onChanged: onChanged,
@@ -47,17 +49,28 @@ class BaseTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.destructiveColor),
+          borderSide: BorderSide(color: AppColors.destructiveColor.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.destructiveColor.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.brandColor.withOpacity(0.1)),
           borderRadius: BorderRadius.circular(10),
         ),
         counterStyle: AppTextStyle.text2XSRegular.copyWith(color: AppColors.textColor),
         hintStyle: AppTextStyle.textSMRegular.copyWith(color: AppColors.textColor.withOpacity(0.5)),
+        errorStyle: AppTextStyle.textXSRegular.copyWith(color: AppColors.destructiveColor.withOpacity(0.6)),
       ),
       style: AppTextStyle.textSMRegular.copyWith(color: AppColors.textColor),
       keyboardType: keyboardType,
       cursorColor: AppColors.brandColor,
       cursorHeight: 20,
       autofocus: autoFocus,
+      validator: validation,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

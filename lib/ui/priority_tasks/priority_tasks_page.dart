@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_plugin/core/usecases/get_available_priority_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/get_tasks_usecase.dart';
+import 'package:todo_plugin/core/usecases/user/get_user_info_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
 import 'package:todo_plugin/ui/priority_tasks/priority_tasks_viewmodel.dart';
 import 'package:todo_plugin/ui/priority_tasks/widgets/priority_tasks_app_bar.dart';
@@ -21,7 +22,8 @@ class PriorityTasksPageState extends State<PriorityTasksPage> {
   void initState() {
     super.initState();
     _viewModel = PriorityTasksViewModel(
-      availablePriorityTaskUseCase: getIt<GetAvailablePriorityTaskUseCase>(),
+      getTaskUseCase: getIt<GetTasksUseCase>(),
+      getUserInfoUseCase: getIt<GetUserInfoUseCase>(),
     )..initializer();
   }
 
@@ -39,7 +41,8 @@ class PriorityTasksPageState extends State<PriorityTasksPage> {
       backgroundColor: Colors.white,
       appBar: PriorityTasksAppBar(
         onSettingPressed: () async {
-          // TODO: implement
+          await context.push('/profile');
+          _viewModel.fetchUserInfo();
         },
       ),
       body: SingleChildScrollView(

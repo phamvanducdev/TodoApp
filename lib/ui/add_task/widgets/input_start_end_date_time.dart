@@ -24,7 +24,7 @@ class InputStartEndDateTime extends StatelessWidget {
                 title: 'Start',
                 currentDate: startTime,
                 onDateChanged: (value) => viewModel.onStartTimeChanged(value),
-                isEnable: false,
+                isEnable: viewModel.isCreateNew,
               );
             },
           ),

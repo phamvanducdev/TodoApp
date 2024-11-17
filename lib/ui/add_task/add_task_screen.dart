@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todo_plugin/core/models/task.dart';
-import 'package:todo_plugin/core/usecases/add_task_usecase.dart';
-import 'package:todo_plugin/core/usecases/update_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/add_task_usecase.dart';
+import 'package:todo_plugin/core/usecases/task/update_task_usecase.dart';
 import 'package:todo_plugin/di/di.dart';
 import 'package:todo_plugin/theme/app_colors.dart';
 import 'package:todo_plugin/ui/add_task/add_task_viewmodel.dart';
