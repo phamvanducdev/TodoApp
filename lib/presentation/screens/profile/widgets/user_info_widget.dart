@@ -172,11 +172,11 @@ class UserInfoWidget extends StatelessWidget {
       child: Center(
         child: RichText(
           text: TextSpan(
-            text: "You're not logged in. ",
+            text: "You have no profile. ",
             style: AppTextStyle.textSMRegular.copyWith(color: AppColors.textColor),
             children: [
               TextSpan(
-                text: "Log in now!",
+                text: "Update now!",
                 style: AppTextStyle.textSMRegular.copyWith(
                   decoration: TextDecoration.underline,
                   color: AppColors.subBrandColor,

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_plugin/data/models/task.dart';
+import 'package:todo_plugin/data/models/user.dart';
 import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
 import 'package:todo_plugin/domain/usecases/user/get_user_info_usecase.dart';
 import 'package:todo_plugin/di/app_get_it.dart';
 import 'package:todo_plugin/config/app_assets.dart';
 import 'package:todo_plugin/config/app_colors.dart';
+import 'package:todo_plugin/domain/usecases/user/user_logout_usecase.dart';
 import 'package:todo_plugin/presentation/screens/profile/profile_viewmodel.dart';
 import 'package:todo_plugin/presentation/screens/profile/widgets/setting_menu_item.dart';
 import 'package:todo_plugin/presentation/screens/profile/widgets/user_info_widget.dart';
+import 'package:todo_plugin/presentation/widgets/app_dialog.dart';
 import 'package:todo_plugin/presentation/widgets/base_app_bar.dart';
 import 'package:todo_plugin/presentation/widgets/bottom_curve_clipper.dart';
 
@@ -33,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _viewModel = ProfileViewModel(
       getUserInfoUseCase: getIt<GetUserInfoUseCase>(),
       getAllTasksUseCase: getIt<GetAllTasksUseCase>(),
+      userLogoutUseCase: getIt<UserLogoutUseCase>(),
     )..initializer();
   }
 
@@ -68,7 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         UserInfoWidget(
                           viewModel: _viewModel,
                           onLoginPressed: () async {
-                            // TODO: Implement authentication
                             final result = await context.push('/updateProfile');
                             if (result is bool && result) {
                               _viewModel.initializer();
@@ -101,10 +104,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           title: 'Settings',
                           onPressed: () => context.push('/settings'),
                         ),
-                        SettingMenuItem(
-                          icon: AppAssets.iconLogout,
-                          title: 'Logout',
-                          onPressed: () {},
+                        StreamBuilder<User?>(
+                          stream: _viewModel.userInfoStream,
+                          builder: (context, snapshot) {
+                            final User? userInfo = snapshot.data;
+                            if (userInfo != null) {
+                              return SettingMenuItem(
+                                icon: AppAssets.iconLogout,
+                                title: 'Logout',
+                                onPressed: () => showConfirmDialog(
+                                  context,
+                                  message: 'Do you want to delete this profile?',
+                                  confirmText: 'OK',
+                                  cancelText: 'Cancel',
+                                  onConfirmed: () => _viewModel.onLogout(),
+                                ),
+                              );
+                            }
+                            return const SizedBox();
+                          },
                         ),
                       ],
                     ),

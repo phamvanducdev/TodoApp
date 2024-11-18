@@ -14,6 +14,7 @@ import 'package:todo_plugin/domain/usecases/task/remove_task_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/update_task_usecase.dart';
 import 'package:todo_plugin/domain/usecases/user/get_user_info_usecase.dart';
 import 'package:todo_plugin/domain/usecases/user/update_user_info_usecase.dart';
+import 'package:todo_plugin/domain/usecases/user/user_logout_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -40,5 +41,6 @@ class AppGetIt {
 
     getIt.registerLazySingleton(() => GetUserInfoUseCase(repository: getIt<UserRepository>()));
     getIt.registerLazySingleton(() => UpdateUserInfoUseCase(repository: getIt<UserRepository>()));
+    getIt.registerLazySingleton(() => UserLogoutUseCase(repository: getIt<UserRepository>()));
   }
 }

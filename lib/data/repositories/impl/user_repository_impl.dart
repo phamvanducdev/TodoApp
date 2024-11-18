@@ -14,4 +14,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> set(User userInfo) => _service.setUserInfo(userInfo);
+
+  @override
+  Future<void> clear() => _service.clearUserInfo();
 }

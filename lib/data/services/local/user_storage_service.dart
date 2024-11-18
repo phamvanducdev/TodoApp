@@ -20,4 +20,8 @@ class UserStorageService {
     final userInfoString = jsonEncode(user.toJson());
     await _prefs.setString(AppConstants.USER_STORAGE_KEY, userInfoString);
   }
+
+  Future<void> clearUserInfo() async {
+    await _prefs.remove(AppConstants.USER_STORAGE_KEY);
+  }
 }
