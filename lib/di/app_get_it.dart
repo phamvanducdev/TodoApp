@@ -7,6 +7,8 @@ import 'package:todo_plugin/data/repositories/user_repository.dart';
 import 'package:todo_plugin/data/services/local/task_storage_service.dart';
 import 'package:todo_plugin/data/services/local/user_storage_service.dart';
 import 'package:todo_plugin/domain/usecases/task/add_task_usecase.dart';
+import 'package:todo_plugin/domain/usecases/task/get_tasks_by_date_usecase.dart';
+import 'package:todo_plugin/domain/usecases/task/get_tasks_by_year_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/remove_task_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/update_task_usecase.dart';
@@ -29,7 +31,9 @@ class AppGetIt {
     getIt.registerLazySingleton<TaskRepository>(() => TaskRepositoryImpl(service: getIt<TaskStorageService>()));
 
     // Register UseCases
-    getIt.registerLazySingleton(() => GetTasksUseCase(repository: getIt<TaskRepository>()));
+    getIt.registerLazySingleton(() => GetAllTasksUseCase(repository: getIt<TaskRepository>()));
+    getIt.registerLazySingleton(() => GetTasksByDateUsecase(repository: getIt<TaskRepository>()));
+    getIt.registerLazySingleton(() => GetTasksByYearUseCase(repository: getIt<TaskRepository>()));
     getIt.registerLazySingleton(() => AddTaskUseCase(repository: getIt<TaskRepository>()));
     getIt.registerLazySingleton(() => UpdateTaskUseCase(repository: getIt<TaskRepository>()));
     getIt.registerLazySingleton(() => RemoveTaskUseCase(repository: getIt<TaskRepository>()));

@@ -6,11 +6,11 @@ import 'package:todo_plugin/domain/usecases/user/get_user_info_usecase.dart';
 import 'package:todo_plugin/utils/date_time_utils.dart';
 
 class PriorityTasksViewModel {
-  final GetTasksUseCase _getTaskUseCase;
+  final GetAllTasksUseCase _getTaskUseCase;
   final GetUserInfoUseCase _getUserInfoUseCase;
 
   PriorityTasksViewModel({
-    required GetTasksUseCase getTaskUseCase,
+    required GetAllTasksUseCase getTaskUseCase,
     required GetUserInfoUseCase getUserInfoUseCase,
   })  : _getTaskUseCase = getTaskUseCase,
         _getUserInfoUseCase = getUserInfoUseCase;

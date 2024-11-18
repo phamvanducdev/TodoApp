@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todo_plugin/data/models/task.dart';
+import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
 import 'package:todo_plugin/domain/usecases/user/get_user_info_usecase.dart';
 import 'package:todo_plugin/di/app_get_it.dart';
 import 'package:todo_plugin/config/app_assets.dart';
@@ -32,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     _viewModel = ProfileViewModel(
       getUserInfoUseCase: getIt<GetUserInfoUseCase>(),
+      getAllTasksUseCase: getIt<GetAllTasksUseCase>(),
     )..initializer();
   }
 
@@ -89,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SettingMenuItem(
                             icon: AppAssets.iconChart,
                             title: 'Statistic',
-                            onPressed: () {},
+                            onPressed: () => context.push('/statistic'),
                           ),
                           SettingMenuItem(
                             icon: AppAssets.iconLocation,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_plugin/data/models/task.dart';
-import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
+import 'package:todo_plugin/domain/usecases/task/get_tasks_by_date_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/remove_task_usecase.dart';
 import 'package:todo_plugin/di/app_get_it.dart';
 import 'package:todo_plugin/config/app_colors.dart';
@@ -27,7 +27,7 @@ class TaskListPageState extends State<TaskListPage> {
   void initState() {
     super.initState();
     _viewModel = TaskListViewModel(
-      getTasksUseCase: getIt<GetTasksUseCase>(),
+      getTasksUseCase: getIt<GetTasksByDateUsecase>(),
       removeTaskUseCase: getIt<RemoveTaskUseCase>(),
     )..fetchTaskList();
   }

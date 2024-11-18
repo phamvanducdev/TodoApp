@@ -22,7 +22,7 @@ class PriorityTasksPageState extends State<PriorityTasksPage> {
   void initState() {
     super.initState();
     _viewModel = PriorityTasksViewModel(
-      getTaskUseCase: getIt<GetTasksUseCase>(),
+      getTaskUseCase: getIt<GetAllTasksUseCase>(),
       getUserInfoUseCase: getIt<GetUserInfoUseCase>(),
     )..initializer();
   }

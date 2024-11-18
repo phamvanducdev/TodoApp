@@ -58,8 +58,7 @@ class UserInfoWidget extends StatelessWidget {
                             /// Profession
                             Text(
                               userInfo.profession ?? 'N/A',
-                              style:
-                                  AppTextStyle.textXSRegular.copyWith(color: AppColors.headerColor, fontStyle: FontStyle.italic),
+                              style: AppTextStyle.text2XSRegular.copyWith(color: AppColors.headerColor),
                             ),
                             const SizedBox(height: 12),
 
@@ -139,23 +138,28 @@ class UserInfoWidget extends StatelessWidget {
   }
 
   _buildTaskCompleted(BuildContext context) {
-    const int numberTasks = 100;
     return Flexible(
       child: Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WidgetUtils.svgPicture(
-              AppAssets.iconBag,
-              width: 14,
-              color: AppColors.brandColor,
-            ),
-            const SizedBox(width: 4),
-            Text(
-              '$numberTasks Task Completed',
-              style: AppTextStyle.textXSRegular.copyWith(color: AppColors.textColor),
-            ),
-          ],
+        child: StreamBuilder<int>(
+          stream: viewModel.taskCompletedNumberStream,
+          builder: (context, snapshot) {
+            final int numberTasks = snapshot.data ?? 0;
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                WidgetUtils.svgPicture(
+                  AppAssets.iconBag,
+                  width: 14,
+                  color: AppColors.brandColor,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  '$numberTasks Task Completed',
+                  style: AppTextStyle.textXSRegular.copyWith(color: AppColors.textColor),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

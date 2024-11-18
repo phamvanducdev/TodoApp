@@ -24,12 +24,17 @@ class UserAvatarWidget extends StatelessWidget {
           /// Avatar image
           ClipRRect(
             borderRadius: BorderRadius.circular(avatarSize / 2),
-            child: Image.network('https://i.pravatar.cc/100'),
+            child: Container(
+              width: avatarSize.toDouble(),
+              height: avatarSize.toDouble(),
+              decoration: BoxDecoration(color: AppColors.greyColor),
+              child: Image.network('https://i.pravatar.cc/100'),
+            ),
           ),
 
           /// Edit button
           Positioned(
-            right: 0,
+            right: 2,
             bottom: 0,
             child: GestureDetector(
               onTap: onEditPressed,

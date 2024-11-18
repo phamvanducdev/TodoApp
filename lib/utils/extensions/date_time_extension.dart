@@ -16,4 +16,24 @@ extension DateTimeExtension on DateTime {
   bool isSameDate(DateTime dateTime) {
     return year == dateTime.year && month == dateTime.month && day == dateTime.day;
   }
+
+  bool isSameOrBeforeDate(DateTime dateTime) {
+    return isSameDate(dateTime) || isBefore(dateTime);
+  }
+
+  bool isSameOrAfterDate(DateTime dateTime) {
+    return isSameDate(dateTime) || isAfter(dateTime);
+  }
+
+  DateTime startOfYear() {
+    return DateTime(year, 1, 1);
+  }
+
+  DateTime addYears(int years) {
+    return DateTime(year + years, month, day, hour, minute, second, millisecond, microsecond);
+  }
+
+  DateTime subtractYears(int years) {
+    return DateTime(year - years, month, day, hour, minute, second, millisecond, microsecond);
+  }
 }

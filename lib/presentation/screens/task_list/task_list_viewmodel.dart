@@ -1,14 +1,14 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:todo_plugin/data/models/task.dart';
-import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
+import 'package:todo_plugin/domain/usecases/task/get_tasks_by_date_usecase.dart';
 import 'package:todo_plugin/domain/usecases/task/remove_task_usecase.dart';
 
 class TaskListViewModel {
-  final GetTasksUseCase _getTasksUseCase;
+  final GetTasksByDateUsecase _getTasksUseCase;
   final RemoveTaskUseCase _removeTaskUseCase;
 
   TaskListViewModel({
-    required GetTasksUseCase getTasksUseCase,
+    required GetTasksByDateUsecase getTasksUseCase,
     required RemoveTaskUseCase removeTaskUseCase,
   })  : _getTasksUseCase = getTasksUseCase,
         _removeTaskUseCase = removeTaskUseCase;
@@ -22,7 +22,7 @@ class TaskListViewModel {
   List<Task> get taskList => _taskListSubject.valueOrNull ?? [];
 
   fetchTaskList() async {
-    final List<Task> taskList = await _getTasksUseCase.execute(startTime: dateTime);
+    final List<Task> taskList = await _getTasksUseCase.execute(dateTime: dateTime);
     _taskListSubject.add(taskList);
   }
 

@@ -4,6 +4,7 @@ import 'package:todo_plugin/data/models/task.dart';
 import 'package:todo_plugin/presentation/screens/add_task/add_task_screen.dart';
 import 'package:todo_plugin/presentation/screens/home/home_screen.dart';
 import 'package:todo_plugin/presentation/screens/profile/profile_screen.dart';
+import 'package:todo_plugin/presentation/screens/statistic/statistic_screen.dart';
 import 'package:todo_plugin/presentation/screens/task_details/task_details_screen.dart';
 import 'package:todo_plugin/presentation/screens/update_profile/update_profile_screen.dart';
 
@@ -39,6 +40,12 @@ class AppRouter {
             path: 'updateProfile',
             builder: (BuildContext context, GoRouterState state) {
               return const UpdateProfileScreen();
+            },
+          ),
+          GoRoute(
+            path: 'statistic',
+            builder: (BuildContext context, GoRouterState state) {
+              return const StatisticScreen();
             },
           ),
         ],

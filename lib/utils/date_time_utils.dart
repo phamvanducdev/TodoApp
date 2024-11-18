@@ -5,6 +5,8 @@ class DateTimeUtils {
   static const String formatddMMMyyyy = "dd MMM yyyy";
   static const String formatMMMddyyyy = "MMM-dd-yyyy";
   static const String formatMMMyyyy = "MMM, yyyy";
+  static const String formatyyyy = "yyyy";
+  static const String formatMMMM = "MMMM";
   static const String formatEEE = "EEE";
   static const String formatdd = "dd";
   static const String formatMMMdd = "MMM, dd";
