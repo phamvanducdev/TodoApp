@@ -55,8 +55,12 @@ class TaskListAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
             decoration: BoxDecoration(
-              color: AppColors.subBrandColor,
               borderRadius: BorderRadius.circular(8),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF006EE9), Color(0xFF105CDB)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
             ),
             child: Row(
               children: [

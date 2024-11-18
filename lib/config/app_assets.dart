@@ -22,6 +22,12 @@ class AppAssets {
   static String iconChart = 'assets/icons/ic_chart.svg';
   static String iconLogout = 'assets/icons/ic_logout.svg';
   static String iconEdit = 'assets/icons/ic_edit.svg';
+  static String iconNotification = 'assets/icons/ic_notifications.svg';
+  static String iconSecurity = 'assets/icons/ic_security.svg';
+  static String iconHelp = 'assets/icons/ic_help.svg';
+  static String iconUpdateSystem = 'assets/icons/ic_update_system.svg';
+  static String iconAbout = 'assets/icons/ic_about.svg';
+  static String iconInvite = 'assets/icons/ic_invite.svg';
 
   /// Backgrounds
   static String bgPriorityTaskCard = 'assets/images/bg_priority_task_card.svg';

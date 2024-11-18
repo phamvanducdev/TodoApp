@@ -20,10 +20,7 @@ class HomeFloatingButton extends StatelessWidget {
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF025892),
-              Color(0xFFD31249),
-            ],
+            colors: [Color(0xFF025892), Color(0xFFD31249)],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),

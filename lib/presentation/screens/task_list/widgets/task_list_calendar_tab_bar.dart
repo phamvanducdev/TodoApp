@@ -106,7 +106,11 @@ class _TaskListCalendarTabBarState extends State<TaskListCalendarTabBar> with Ti
       height: selected ? itemSelectedHeight : itemUnSelectedHeight,
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: selected ? AppColors.subBrandColor : const Color(0xFFEBF2FF),
+        gradient: LinearGradient(
+          colors: selected ? const [Color(0xFF006EE9), Color(0xFF105CDB)] : const [Color(0xFFEBF2FF), Color(0xFFEBF2FF)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
         borderRadius: BorderRadius.circular(10),
       ),
       alignment: Alignment.center,
