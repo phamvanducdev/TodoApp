@@ -15,5 +15,5 @@ Probation Project at VietinBank.
 > - [x] Profile: Create / Update user info
 
 **TODO**
-> - [ ] TaskManager: Statistic by months
-> - [ ] Profile: Update user avatar
+> - [x] TaskManager: Statistic by months
+> - [x] Profile: Update user avatar

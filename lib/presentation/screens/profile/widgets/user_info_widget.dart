@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_plugin/data/models/user.dart';
@@ -24,9 +26,10 @@ class UserInfoWidget extends StatelessWidget {
       builder: (context, snapshot) {
         final User? userInfo = snapshot.data;
         return Stack(
+          alignment: Alignment.topCenter,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 32),
                 Container(
@@ -79,7 +82,7 @@ class UserInfoWidget extends StatelessWidget {
             ),
 
             /// UserAvatar
-            if (userInfo != null) _buildUserAvatar(context, avatar: 'URL'),
+            if (userInfo != null) _buildUserAvatar(context, imagePath: userInfo.image),
           ],
         );
       },
@@ -88,26 +91,24 @@ class UserInfoWidget extends StatelessWidget {
 
   _buildUserAvatar(
     BuildContext context, {
-    required String? avatar,
+    required String? imagePath,
   }) {
     const int avatarSize = 84;
-    return Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(avatarSize / 2),
       child: Container(
         width: avatarSize.toDouble(),
         height: avatarSize.toDouble(),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.greyColor,
-        ),
-        child: CircleAvatar(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(avatarSize / 2),
-            child: Image.network('https://i.pravatar.cc/100'),
-          ),
-        ),
+        decoration: BoxDecoration(color: AppColors.greyColor),
+        child: imagePath != null
+            ? Image.file(File(imagePath), fit: BoxFit.cover)
+            : Center(
+                child: Text(
+                  'N/A',
+                  style: AppTextStyle.textSMRegular.copyWith(color: AppColors.brandColor),
+                ),
+              ),
       ),
     );
   }

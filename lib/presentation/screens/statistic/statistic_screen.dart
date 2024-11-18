@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todo_plugin/config/app_colors.dart';
 import 'package:todo_plugin/di/app_get_it.dart';
 import 'package:todo_plugin/domain/usecases/task/get_tasks_by_year_usecase.dart';
-import 'package:todo_plugin/domain/usecases/task/get_tasks_usecase.dart';
 import 'package:todo_plugin/presentation/screens/statistic/statistic_viewmodel.dart';
 import 'package:todo_plugin/presentation/screens/statistic/widgets/statistic_filter_by_year_widget.dart';
 import 'package:todo_plugin/presentation/screens/statistic/widgets/statistic_task_by_months_widget.dart';

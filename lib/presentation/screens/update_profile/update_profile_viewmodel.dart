@@ -28,6 +28,10 @@ class UpdateProfileViewModel {
   Stream<DateTime?> get dateOfBirthStream => _dateOfBirthSubject.stream;
   DateTime? get dateOfBirth => _dateOfBirthSubject.valueOrNull;
 
+  final _imageAvatarPathSubject = BehaviorSubject<String?>();
+  Stream<String?> get imageAvatarPathStream => _imageAvatarPathSubject.stream;
+  String? get imageAvatarPath => _imageAvatarPathSubject.valueOrNull;
+
   final _validateSubject = BehaviorSubject<bool>();
   Stream<bool> get validateStream => _validateSubject.stream;
 
@@ -40,6 +44,7 @@ class UpdateProfileViewModel {
     if (userInfo.dateOfBirth != null) {
       _dateOfBirthSubject.add(DateTimeUtils.from(userInfo.dateOfBirth!));
     }
+    _imageAvatarPathSubject.add(userInfo.image);
     _validate();
   }
 
@@ -54,12 +59,17 @@ class UpdateProfileViewModel {
     _validate();
   }
 
+  onImageAvatarChanged(String value) {
+    _imageAvatarPathSubject.add(value);
+  }
+
   Future<bool> onSavePressed() async {
     _updateUserInfoUseCase.execute(
       User(
         id: DateTime.now().millisecondsSinceEpoch,
         email: inputEmailController.text,
         name: inputUserNameController.text,
+        image: imageAvatarPath,
         profession: inputProfessionController.text,
         dateOfBirth: (dateOfBirth ?? DateTime.now()).millisecondsSinceEpoch,
       ),

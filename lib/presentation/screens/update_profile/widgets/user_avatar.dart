@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:todo_plugin/config/app_assets.dart';
 import 'package:todo_plugin/config/app_colors.dart';
+import 'package:todo_plugin/config/app_text_styles.dart';
 import 'package:todo_plugin/presentation/screens/update_profile/update_profile_viewmodel.dart';
 import 'package:todo_plugin/utils/widget_utils.dart';
 
@@ -28,19 +32,33 @@ class UserAvatarWidget extends StatelessWidget {
               width: avatarSize.toDouble(),
               height: avatarSize.toDouble(),
               decoration: BoxDecoration(color: AppColors.greyColor),
-              child: Image.network('https://i.pravatar.cc/100'),
+              child: StreamBuilder<String?>(
+                stream: viewModel.imageAvatarPathStream,
+                builder: (context, snapshot) {
+                  final String? imagePath = snapshot.data;
+                  if (imagePath != null) {
+                    return Image.file(File(imagePath), fit: BoxFit.cover);
+                  }
+                  return Center(
+                    child: Text(
+                      'N/A',
+                      style: AppTextStyle.textSMRegular.copyWith(color: AppColors.brandColor),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
 
           /// Edit button
           Positioned(
-            right: 2,
+            right: 4,
             bottom: 0,
             child: GestureDetector(
-              onTap: onEditPressed,
+              onTap: _pickerImageAvatar,
               child: Container(
-                width: 24,
-                height: 24,
+                width: 20,
+                height: 20,
                 padding: const EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   color: AppColors.brandColor,
@@ -56,5 +74,12 @@ class UserAvatarWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _pickerImageAvatar() async {
+    final XFile? imageFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (imageFile != null) {
+      viewModel.onImageAvatarChanged(imageFile.path);
+    }
   }
 }

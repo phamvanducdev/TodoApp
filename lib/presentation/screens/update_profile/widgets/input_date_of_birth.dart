@@ -27,12 +27,12 @@ class InputDateOfBirth extends StatelessWidget {
         StreamBuilder<DateTime?>(
           stream: viewModel.dateOfBirthStream,
           builder: (context, snapshot) {
-            final DateTime currentDate = snapshot.data ?? DateTime.now();
+            final DateTime? currentDate = snapshot.data;
             return GestureDetector(
               onTap: () async {
                 final DateTime? pickedDate = await showDatePicker(
                   context: context,
-                  initialDate: currentDate,
+                  initialDate: currentDate ?? DateTime.now(),
                   firstDate: DateTime(1900),
                   lastDate: DateTime.now(),
                 );
@@ -53,8 +53,10 @@ class InputDateOfBirth extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        DateTimeUtils.format(currentDate, DateTimeUtils.formatMMMddyyyy),
-                        style: AppTextStyle.textSMRegular.copyWith(color: AppColors.textColor),
+                        currentDate != null ? DateTimeUtils.format(currentDate, DateTimeUtils.formatMMMddyyyy) : 'Select date...',
+                        style: AppTextStyle.textSMRegular.copyWith(
+                          color: currentDate != null ? AppColors.textColor : AppColors.textColor.withOpacity(0.5),
+                        ),
                       ),
                     ),
                   ],
